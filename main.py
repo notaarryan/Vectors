@@ -1,3 +1,4 @@
+__package__
 import matplotlib.pyplot as plt
 import numpy as np
 import math
@@ -62,8 +63,7 @@ class ThreeDVector(TwoDVector):
         ax.set_xlabel('X Axis')
         ax.set_ylabel('Y Axis')
         ax.set_zlabel('Z Axis')
-        plt.show()
+        plt.show()   
 
-v1 = TwoDVector(1,4)
-v2 = TwoDVector(2,4)
-print(VectorOperations.angle(v1,v2))
+if __name__ == "__main__":
+    pass 
