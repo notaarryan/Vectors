@@ -3,12 +3,18 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 
 class VectorOperations:
-    pass
+    @staticmethod
+    def dotProduct(v1,v2) -> float:
+        if len(v1.vector) != len(v2.vector):
+            raise Exception("Vectors have to be of the same dimensions")
+        else:
+            return (v1.i*v2.i)+(v1.j*v2.j)+(v1.k*v2.k)
 
 class TwoDVector(VectorOperations):
     def __init__(self,i,j):
         self.i = i
         self.j = j
+        self.k = 0
         self.vector = [i,j]
         self.xpoint = np.array([0,i])
         self.ypoint = np.array([0,j])
@@ -39,5 +45,7 @@ class ThreeDVector(TwoDVector):
         ax.set_zlabel('Z Axis')
         plt.show()
 
-v = ThreeDVector(1,2,3)
-v.plot()
+v1 = TwoDVector(1,4)
+v2 = TwoDVector(2,4)
+dotProd = VectorOperations.dotProduct(v1,v2)
+print(dotProd)
