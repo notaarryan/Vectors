@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from mpl_toolkits.mplot3d import Axes3D
+import math
 
 class VectorOperations:
     @staticmethod
@@ -9,15 +9,32 @@ class VectorOperations:
             raise Exception("Vectors have to be of the same dimensions")
         else:
             return (v1.i*v2.i)+(v1.j*v2.j)+(v1.k*v2.k)
-
+        
+    @staticmethod
+    def angle(v1,v2):
+        if len(v1.vector) != len(v2.vector):
+            raise Exception("Vectors have to be of the same dimensions")
+        else:
+            if VectorOperations.dotProduct(v1,v2) == 0:
+                return 90
+            elif VectorOperations.dotProduct(v1,v2) == 1:
+                return 0
+            else:
+                dot = VectorOperations.dotProduct(v1,v2)
+                mag1,mag2 = v1.mag(),v2.mag()
+                return math.degrees(math.acos(dot/(mag1*mag2)))
+            
 class TwoDVector(VectorOperations):
-    def __init__(self,i,j):
-        self.i = i
-        self.j = j
-        self.k = 0
-        self.vector = [i,j]
-        self.xpoint = np.array([0,i])
-        self.ypoint = np.array([0,j])
+    try:
+        def __init__(self,i=0,j=0):
+            self.i = i
+            self.j = j
+            self.k = 0
+            self.vector = [i,j]
+            self.xpoint = np.array([0,i])
+            self.ypoint = np.array([0,j])
+    except TypeError as e:
+        print(e)
 
     def plot(self):
         plt.plot(self.xpoint,self.ypoint)
@@ -27,13 +44,15 @@ class TwoDVector(VectorOperations):
         return ((self.i**2)+(self.j**2))**0.5
     
 class ThreeDVector(TwoDVector):
-    def __init__(self, i, j, k):
+    
+    def __init__(self, i=0, j=0, k=0):
         super().__init__(i, j)
         self.k = k
         self.vector = [i,j,k]
         self.xpoint = np.array([0,i])
         self.ypoint = np.array([0,j])
         self.zpoint = np.array([0,k])
+    
     
     def plot(self):
         fig = plt.figure()
@@ -47,5 +66,4 @@ class ThreeDVector(TwoDVector):
 
 v1 = TwoDVector(1,4)
 v2 = TwoDVector(2,4)
-dotProd = VectorOperations.dotProduct(v1,v2)
-print(dotProd)
+print(VectorOperations.angle(v1,v2))
