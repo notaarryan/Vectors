@@ -10,7 +10,7 @@ class VectorOperations:
             raise Exception("Vectors have to be of the same dimensions")
         else:
             return (v1.i*v2.i)+(v1.j*v2.j)+(v1.k*v2.k)
-        
+                
     @staticmethod
     def angle(v1,v2):
         if len(v1.vector) != len(v2.vector):
@@ -24,7 +24,7 @@ class VectorOperations:
                 dot = VectorOperations.dotProduct(v1,v2)
                 mag1,mag2 = v1.mag(),v2.mag()
                 return math.degrees(math.acos(dot/(mag1*mag2)))
-            
+                
 class TwoDVector(VectorOperations):
     try:
         def __init__(self,i=0,j=0):
@@ -63,7 +63,19 @@ class ThreeDVector(TwoDVector):
         ax.set_xlabel('X Axis')
         ax.set_ylabel('Y Axis')
         ax.set_zlabel('Z Axis')
-        plt.show()   
+        plt.show()  
+
+    def cross_product(v1, v2):
+        if len(v1.vector) != len(v2.vector):
+            raise ValueError("Both vectors must have exactly 3 elements.")
+        
+        cross_prod = [
+            v1.vector[1] * v2.vector[2] - v1.vector[2] * v2.vector[1],
+            v1.vector[2] * v2.vector[0] - v1.vector[0] * v2.vector[2],
+            v1.vector[0] * v2.vector[1] - v1.vector[1] * v2.vector[0]
+        ]
+    
+        return cross_prod 
 
 if __name__ == "__main__":
     pass 
