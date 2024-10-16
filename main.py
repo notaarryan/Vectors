@@ -24,7 +24,20 @@ class VectorOperations:
                 dot = VectorOperations.dotProduct(v1,v2)
                 mag1,mag2 = v1.mag(),v2.mag()
                 return math.degrees(math.acos(dot/(mag1*mag2)))
-                
+
+    @staticmethod
+    def isOrthogonal(v1,v2) -> bool:
+        if VectorOperations.dotProduct(v1,v2) == 0:
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def isParallel(v1,v2) -> bool:
+        if VectorOperations.dotProduct(v1,v2) == 1:
+            return True
+        else:
+            return False    
 class TwoDVector(VectorOperations):
     try:
         def __init__(self,i=0,j=0):
