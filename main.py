@@ -5,15 +5,21 @@ import math
 
 class VectorOperations:
     @staticmethod
+    def sum(v1,v2):
+        if v1.vector.shape != v2.vector.shape:
+            raise Exception("To add two vectors they have to be of same size")
+        else:
+            return v1.vector + v2.vector
+    @staticmethod
     def dotProduct(v1,v2) -> float:
-        if len(v1.vector) != len(v2.vector):
+        if v1.vector.shape != v2.vector.shape:
             raise Exception("Vectors have to be of the same dimensions")
         else:
             return (v1.i*v2.i)+(v1.j*v2.j)+(v1.k*v2.k)
                 
     @staticmethod
     def angle(v1,v2):
-        if len(v1.vector) != len(v2.vector):
+        if v1.vector.shape != v2.vector.shape:
             raise Exception("Vectors have to be of the same dimensions")
         else:
             if VectorOperations.dotProduct(v1,v2) == 0:
@@ -44,7 +50,7 @@ class TwoDVector(VectorOperations):
             self.i = i
             self.j = j
             self.k = 0
-            self.vector = [i,j]
+            self.vector = np.array([i,j])
             self.xpoint = np.array([0,i])
             self.ypoint = np.array([0,j])
     except TypeError as e:
@@ -62,7 +68,7 @@ class ThreeDVector(TwoDVector):
     def __init__(self, i=0, j=0, k=0):
         super().__init__(i, j)
         self.k = k
-        self.vector = [i,j,k]
+        self.vector = np.array([i,j,k])
         self.xpoint = np.array([0,i])
         self.ypoint = np.array([0,j])
         self.zpoint = np.array([0,k])
@@ -91,4 +97,4 @@ class ThreeDVector(TwoDVector):
         return cross_prod 
 
 if __name__ == "__main__":
-    pass 
+    pass
